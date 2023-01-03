@@ -701,7 +701,6 @@ body {
                 </div><!-- End .heading -->
                 </div>
                 <div id="1" class="row product__filter">
-            
             <?php                                     
             $sql = "SELECT * FROM sanpham a join danhmuc b on a.danhmuc_id=b.danhmuc_id
             where a.giaban>=30000000";
