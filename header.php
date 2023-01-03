@@ -52,10 +52,6 @@ body {
   background-size: cover;
 }
 </style>
-
-
-
-
     <div class="page-wrapper">
         <header class="header header-intro-clearance header-3">
             <div class="header-top">
@@ -80,7 +76,7 @@ body {
                                         </div>
                                     </li>
                                     
-                                    <li><a style style="font-family:roboto" href="#signin-modal" data-toggle="modal">Đăng nhập /đăng kí</a>
+                                    <li><a style style="font-family:roboto" href="#signin-modal" data-toggle="modal">Đăng nhập /Đăng kí</a>
 
      <!-- Sign in / Register Modal -->
     <div class="modal fade" id="signin-modal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -274,8 +270,9 @@ body {
                                             while($row_danhmuc=$result->fetch_assoc())
                                             {
                                                 ?>
-                                                <li class="item-lead"><a style="font-family:roboto" href="#"><?php echo $row_danhmuc['tendanhmuc'];?></a></li>
-                                           
+                                                <li class="item-lead"><a style="font-family:roboto" href="category.php?id=<?php echo $row_danhmuc['danhmuc_id'];?>"><?php echo $row_danhmuc['tendanhmuc']?></a></li>
+
+
                                                 <?php
                                             $i++;
                                             }
