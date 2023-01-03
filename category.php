@@ -11,17 +11,11 @@ $ketnoi = mysqli_connect("localhost","root","","sunphone");
 $id=$_GET["id"];
 
 //Bước 3: Hiển thị các dữ liệu trong bảng tbl_sanpham ra đây
-$sql = "
-    SELECT * 
-    FROM sanpham 
-    WHERE danhmuc_id = ".$id  ;
-
+$sql = "SELECT * FROM sanpham a join danhmuc b on a.danhmuc_id=b.danhmuc_id
+   WHERE a.danhmuc_id = ".$id  ;
 $dulieu = mysqli_query($ketnoi, $sql);
 //  $product = mysqli_fetch_assoc($dulieu);
 $row = mysqli_fetch_array($dulieu);
-$sql1="select * from danhmuc";
-$dulieu2= mysqli_query($ketnoi, $sql1);
-$row_dm=mysqli_fetch_array($dulieu2);
 ?>
 <body>
     <div class="page-wrapper">
@@ -36,7 +30,7 @@ $row_dm=mysqli_fetch_array($dulieu2);
                     <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="index.php" style="font-family:roboto">Trang chủ</a></li>
                     <li class="breadcrumb-item" style="font-family:roboto">Chi tiết sản phẩm</li>
-                    <li class="breadcrumb-item" style="font-family:roboto"><?php echo $row_dm['tendanhmuc']?></li>
+                    <li class="breadcrumb-item" style="font-family:roboto"><?php echo $row['tendanhmuc']?></li>
                     </ol>
                 </div><!-- End .container -->
             </nav><!-- End .breadcrumb-nav -->
@@ -122,27 +116,26 @@ $row_dm=mysqli_fetch_array($dulieu2);
                 </div>
                 <div id="1" class="row product__filter">
              <?php                                     
-            $sql = "SELECT * FROM sanpham a join danhmuc b on a.danhmuc_id=b.danhmuc_id
-            where a.giaban>=30000000";
-            $dulieu = mysqli_query($ketnoi, $sql);
+            $sql_sp = "SELECT * FROM sanpham a join danhmuc b on a.danhmuc_id=b.danhmuc_id";
+            $dulieu1 = mysqli_query($ketnoi, $sql_sp);
         
-            while ($row = mysqli_fetch_array($dulieu)) 
+            while ($row_sp = mysqli_fetch_array($dulieu1)) 
             {
             ;?>
 
          <div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix best-sellers ">
          <div class="product product-2">
          <figure class="product-media">
-            <a href="product.php?id=<?php echo $row["sanpham_id"];?>">
-             <img src="assets/<?php echo $row["hinh_anh"];?>" >        
+            <a href="product.php?id=<?php echo $row_sp["sanpham_id"];?>">
+             <img src="assets/<?php echo $row_sp["hinh_anh"];?>" >        
                 </a>
                 <div class="product-action-vertical">
                     <a style="font-family:roboto" href="wishlist.php" class="btn-product-icon btn-wishlist btn-expandable"><span>Thêm mục yêu thích</span></a>
                 </div><!-- End .product-action -->
 
                 <div class="product-action product-action-dark">
-                    <a style="font-family:roboto"  href="addtocart.php?id=<?php echo $row['sanpham_id']?>" class="btn-product btn-cart" title="Add to cart"><span>Thêm vào giỏ</span></a>
-                    <a style="font-family:roboto" href="popup/quickView.php?id=<?php echo $row["sanpham_id"];?> && danhmuc_id=<?php echo $row["danhmuc_id"];?>" class="btn-product btn-quickview" title="Quick view"><span>Xem nhanh</span></a>
+                    <a style="font-family:roboto"  href="addtocart.php?id=<?php echo $row_sp['sanpham_id']?>" class="btn-product btn-cart" title="Add to cart"><span>Thêm vào giỏ</span></a>
+                    <a style="font-family:roboto" href="popup/quickView.php?id=<?php echo $row_sp["sanpham_id"];?> && danhmuc_id=<?php echo $row_sp["danhmuc_id"];?>" class="btn-product btn-quickview" title="Quick view"><span>Xem nhanh</span></a>
                 </div><!-- End .product-action -->
             </figure><!-- End .product-media -->
             
@@ -150,14 +143,14 @@ $row_dm=mysqli_fetch_array($dulieu2);
                                 <div class="product-cat" style="font-family:roboto" >
                                     <a style="font-family:roboto" href="#"><?php echo $row["tendanhmuc"];?></a>
                                 </div><!-- End .product-cat -->
-                                <h3 class="product-title"><a style="font-family:roboto"  href="product.php?id=<?php echo $row["sanpham_id"];?>"><?php echo $row["ten_sp"];?></a></h3><!-- End .product-title -->
+                                <h3 class="product-title"><a style="font-family:roboto"  href="product.php?id=<?php echo $row_sp["sanpham_id"];?>"><?php echo $row_sp["ten_sp"];?></a></h3><!-- End .product-title -->
                                 <br>
                                 <div style="font-family:roboto" class="product-price">
-                                <?php echo number_format($row["giaban"]);?><sup>đ</sup>
+                                <?php echo number_format($row_sp["giaban"]);?><sup>đ</sup>
                                 </div><!-- End .product-price -->
                                 <div class="ratings-container">
                                     <div class="ratings">
-                                        <div class="ratings-val" style="width:<?php echo $row["rate"];?> ;"></div><!-- End .ratings-val -->
+                                        <div class="ratings-val" style="width:<?php echo $row_sp["rate"];?> ;"></div><!-- End .ratings-val -->
                                     </div><!-- End .ratings -->
                                     
                                 </div><!-- End .rating-container -->
