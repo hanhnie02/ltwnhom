@@ -11,24 +11,20 @@ $ketnoi = mysqli_connect("localhost","root","","sunphone");
 $id=$_GET["id"];
 
 //Bước 3: Hiển thị các dữ liệu trong bảng tbl_sanpham ra đây
-$sql = "
-    SELECT * 
-    FROM sanpham 
-    WHERE danhmuc_id = ".$id  ;
+$sql = "SELECT * FROM sanpham a join danhmuc b on a.danhmuc_id=b.danhmuc_id
+   WHERE a.danhmuc_id = ".$id  ;
+
 
 $dulieu = mysqli_query($ketnoi, $sql);
 //  $product = mysqli_fetch_assoc($dulieu);
 $row = mysqli_fetch_array($dulieu);
-$sql1="select * from danhmuc";
-$dulieu2= mysqli_query($ketnoi, $sql1);
-$row_dm=mysqli_fetch_array($dulieu2);
 ?>
 <body>
     <div class="page-wrapper">
         <main class="main">
         <div class="page-header text-center" style="background-image: url('assets//images/banners/tett.png')">
                 <div class="container">
-                    <h1 class="page-title"><?php echo $row_dm['tendanhmuc'];?></h1>
+                    <h1 class="page-title"><?php echo $row['tendanhmuc'];?></h1>
                 </div><!-- End .container -->
             </div><!-- End .page-header -->
             <nav aria-label="breadcrumb" class="breadcrumb-nav mb-2">
@@ -36,7 +32,7 @@ $row_dm=mysqli_fetch_array($dulieu2);
                     <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="index.php" style="font-family:roboto">Trang chủ</a></li>
                     <li class="breadcrumb-item" style="font-family:roboto">Chi tiết sản phẩm</li>
-                    <li class="breadcrumb-item" style="font-family:roboto"><?php echo $row_dm['tendanhmuc']?></li>
+                    <li class="breadcrumb-item" style="font-family:roboto"><?php echo $row['tendanhmuc']?></li>
                     </ol>
                 </div><!-- End .container -->
             </nav><!-- End .breadcrumb-nav -->
@@ -123,7 +119,7 @@ $row_dm=mysqli_fetch_array($dulieu2);
                 <div id="1" class="row product__filter">
              <?php                                     
             $sql = "SELECT * FROM sanpham a join danhmuc b on a.danhmuc_id=b.danhmuc_id
-            where a.giaban>=30000000";
+            WHERE a.danhmuc_id = ".$id  ;
             $dulieu = mysqli_query($ketnoi, $sql);
         
             while ($row = mysqli_fetch_array($dulieu)) 
