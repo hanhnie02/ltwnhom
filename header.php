@@ -1,5 +1,5 @@
 <?php
-// Ket noi CSDL hihi
+// Ket noi CSDL 
 $servername="localhost";
 $username="root";
 $password="";
@@ -11,7 +11,6 @@ if($conn->connect_error){
 mysqli_query($conn,'set names utf8');
 session_start();
 $cart = (isset($_SESSION['cart'])) ? $_SESSION['cart'] : [];
-// haha
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -337,7 +336,7 @@ body {
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="elements-list.html" style="font-family:roboto">Bảo hành</a>
+                                    <a href="baohanh.php" style="font-family:roboto">Bảo hành</a>
 
                                 </li>
                                 <li>

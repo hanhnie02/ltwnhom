@@ -125,43 +125,43 @@ require("header.php");
                                     </div><!-- .End .tab-pane -->
                                     <div style="text-align: left; font-family:roboto; font-size: 16px; font-color:#666" class="tab-pane fade table" id="product-info-tab" role="tabpanel" aria-labelledby="product-info-link" >
                                         <table class="table table-striped table-bordered" >
-                <tr>
-                    <td>&ensp; Kích thước màn hình</td>
-                    <td>&ensp; <?php echo $row['kichthuocman']; ?></td>
-                </tr>
-                <tr>
-                    <td>&ensp; Công nghệ màn hình</td>
-                    <td>&ensp; <?php echo $row['congngheman']; ?></td>
-                </tr>
-                <tr>
-                    <td>&ensp; Camera sau</td>
-                    <td>&ensp; <?php echo $row['cam_sau']; ?></td>
-                </tr>
-                <tr>
-                    <td>&ensp; Cam trước</td>
-                    <td>&ensp; <?php echo $row['cam_truoc']; ?></td>
-                </tr>
-                <tr>
-                    <td> &ensp; Chipset</td>
-                    <td>&ensp; <?php echo $row['chipset']; ?></td>
-                </tr>
-                <tr>
-                    <td>&ensp; Pin</td>
-                    <td>&ensp; <?php echo $row['pin']; ?></td>
-                </tr>
-                <tr>
-                    <td>&ensp; Hệ điều hành</td>
-                    <td>&ensp; <?php echo $row['hedieuhanh']; ?></td>
-                </tr>
-                <tr>
-                    <td>&ensp; RAM</td>
-                    <td>&ensp; <?php echo $row['ram']; ?></td>
-                </tr>
-                <tr>
-                    <td>&ensp; Bộ nhớ trong</td>
-                    <td>&ensp; <?php echo $row['bonhotrong']; ?></td>
-                </tr>
-            </table>
+                                            <tr>
+                                                <td>&ensp; Kích thước màn hình</td>
+                                                <td>&ensp; <?php echo $row['kichthuocman']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td>&ensp; Công nghệ màn hình</td>
+                                                <td>&ensp; <?php echo $row['congngheman']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td>&ensp; Camera sau</td>
+                                                <td>&ensp; <?php echo $row['cam_sau']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td>&ensp; Cam trước</td>
+                                                <td>&ensp; <?php echo $row['cam_truoc']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td> &ensp; Chipset</td>
+                                                <td>&ensp; <?php echo $row['chipset']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td>&ensp; Pin</td>
+                                                <td>&ensp; <?php echo $row['pin']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td>&ensp; Hệ điều hành</td>
+                                                <td>&ensp; <?php echo $row['hedieuhanh']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td>&ensp; RAM</td>
+                                                <td>&ensp; <?php echo $row['ram']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td>&ensp; Bộ nhớ trong</td>
+                                                <td>&ensp; <?php echo $row['bonhotrong']; ?></td>
+                                            </tr>
+                                        </table>
 
                                     </div><!-- .End .tab-pane -->                                                           
                                 </div><!-- End .tab-content -->
