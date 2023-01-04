@@ -157,6 +157,10 @@ require("header.php");
                     <td>&ensp; RAM</td>
                     <td>&ensp; <?php echo $row['ram']; ?></td>
                 </tr>
+                <tr>
+                    <td>&ensp; Bộ nhớ trong</td>
+                    <td>&ensp; <?php echo $row['bonhotrong']; ?></td>
+                </tr>
             </table>
 
                                     </div><!-- .End .tab-pane -->                                                           

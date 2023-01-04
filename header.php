@@ -341,7 +341,7 @@ body {
 
                                 </li>
                                 <li>
-                                    <a href="elements-list.html" style="font-family:roboto">Liên hệ</a>
+                                    <a href="contact.php" style="font-family:roboto">Liên hệ</a>
 
                                 </li>
                             </ul><!-- End .menu -->
