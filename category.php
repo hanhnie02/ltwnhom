@@ -124,6 +124,7 @@ $row = mysqli_fetch_array($dulieu);
                             <div class="products mb-3">
                                 
                                 <div class="row justify-content-center">
+
                                 <div class="container">
                                 <hr class="mt-3 mb-6">
                             </div><!-- End .container -->
@@ -151,6 +152,7 @@ $row = mysqli_fetch_array($dulieu);
                                 <div class="product-action-vertical">
                                     <a style="font-family:roboto" href="wishlist.php" class="btn-product-icon btn-wishlist btn-expandable"><span>Thêm mục yêu thích</span></a>
                                 </div><!-- End .product-action -->
+
 
                                 <div class="product-action product-action-dark">
                                     <a style="font-family:roboto"  href="addtocart.php?id=<?php echo $row['sanpham_id']?>" class="btn-product btn-cart" title="Add to cart"><span>Thêm vào giỏ</span></a>
