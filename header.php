@@ -271,8 +271,6 @@ body {
                                             {
                                                 ?>
                                                 <li class="item-lead"><a style="font-family:roboto" href="category.php?id=<?php echo $row_danhmuc['danhmuc_id'];?>"><?php echo $row_danhmuc['tendanhmuc']?></a></li>
-
-
                                                 <?php
                                             $i++;
                                             }

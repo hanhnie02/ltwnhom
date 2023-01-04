@@ -6,23 +6,45 @@
 <?php require("header.php");
 $ketnoi = mysqli_connect("localhost","root","","sunphone");
 /*mysqli_set_charset($ketnoi, 'UTF8');*/
-
 // Bước 2: Lấy dữ liệu từ trên đường đẫn
 $id=$_GET["id"];
 
 //Bước 3: Hiển thị các dữ liệu trong bảng tbl_sanpham ra đây
 $sql = "SELECT * FROM sanpham a join danhmuc b on a.danhmuc_id=b.danhmuc_id
    WHERE a.danhmuc_id = ".$id  ;
+
+
 $dulieu = mysqli_query($ketnoi, $sql);
 //  $product = mysqli_fetch_assoc($dulieu);
 $row = mysqli_fetch_array($dulieu);
+
 ?>
 <body>
+    <?php
+    $param="";
+    $orderConditon="";
+    $orderField=isset($_GET['field']) ? $_GET['field'] : "";
+    $orderSort=isset($_GET['sort']) ? $_GET['sort'] : "";
+    if(!empty($orderField)&&!empty($orderSort)) {
+            $param .= "field=".$orderField."&sort=".$orderSort."&";
+            $orderConditon = "ORDER BY ".$orderField." ".$orderSort;
+        }
+        $item_per_page = !empty($_GET['per_page'])? $_GET['per_page'] :4;
+        $current_page = !empty($_GET['page'])?$_GET['page']:1; //trang hien tai
+        $offset = ($current_page - 1) * $item_per_page;
+        $sql = "SELECT * FROM `sanpham`  ".$orderConditon."  LIMIT " . $item_per_page . " OFFSET " . $offset ;
+        $sql_total= "SELECT * FROM `sanpham` "; 
+        $totalRecords = mysqli_query($ketnoi,$sql_total );
+        $Records = mysqli_num_rows($totalRecords);
+        $totalPages = ceil($Records / $item_per_page);
+        $query=mysqli_query($ketnoi,$sql);
+        $num2 = mysqli_num_rows($query);
+    ?>
     <div class="page-wrapper">
         <main class="main">
         <div class="page-header text-center" style="background-image: url('assets//images/banners/tett.png')">
                 <div class="container">
-                    <h1 class="page-title"><?php echo $row_dm['tendanhmuc'];?></h1>
+                    <h1 class="page-title"><?php echo $row['tendanhmuc'];?></h1>
                 </div><!-- End .container -->
             </div><!-- End .page-header -->
             <nav aria-label="breadcrumb" class="breadcrumb-nav mb-2">
@@ -34,11 +56,6 @@ $row = mysqli_fetch_array($dulieu);
                     </ol>
                 </div><!-- End .container -->
             </nav><!-- End .breadcrumb-nav -->
-
-            <div class="page-content">
-                <div class="container">
-                	<div class="row">
-                		<div class="col-lg-9">
                 			<div class="toolbox">
                 				<div class="toolbox-left">
                 					<div class="toolbox-info">
@@ -48,12 +65,14 @@ $row = mysqli_fetch_array($dulieu);
                                 
                 				<div class="toolbox-right">
                 					<div class="toolbox-sort">
-                						<label for="sortby">Sort by:</label>
+                						<label for="sortby">Sắp xếp theo:</label>
+                                        <!--sắp xếp lọc theo -->
                 						<div class="select-custom">
-											<select name="sortby" id="sortby" class="form-control">
-												<option value="popularity" selected="selected">Most Popular</option>
-												<option value="rating">Most Rated</option>
-												<option value="date">Date</option>
+											<select name="sortby" id="sortby" class="form-control" onchange="this.options[this.selectedIndex].value && (window.location=this.options[this.selectedIndex].value);">
+												<option value="" >--Lọc--</option>
+												<option value="?field=giaban&sort=asc" >Giá tăng dần</option>
+                                                <option value="?field=giaban&sort=desc" >Giá giảm dần</option>
+                                                <option value="" ></option>
 											</select>
 										</div>
                 					</div><!-- End .toolbox-sort -->
@@ -63,7 +82,7 @@ $row = mysqli_fetch_array($dulieu);
                 								<rect x="0" y="0" width="4" height="4" />
                 								<rect x="6" y="0" width="10" height="4" />
                 								<rect x="0" y="6" width="4" height="4" />
-                								<rect x="6" y="6" width="10" height="4" />
+                                                <rect x="6" y="6" width="10" height="4" />
                 							</svg>
                 						</a>
 
@@ -105,70 +124,71 @@ $row = mysqli_fetch_array($dulieu);
                             <div class="products mb-3">
                                 
                                 <div class="row justify-content-center">
-                <div class="container">
-                <hr class="mt-3 mb-6">
-            </div><!-- End .container -->
-            <div class="container trending">
-                <div class="heading heading-flex mb-3">
-                    <div class="heading-left">
-                    </div><!-- End .heading-left -->                  
-                </div><!-- End .heading -->
-                </div>
-                <div id="1" class="row product__filter">
-             <?php                                     
-            $sql_sp = "SELECT * FROM sanpham a join danhmuc b on a.danhmuc_id=b.danhmuc_id";
-            $dulieu1 = mysqli_query($ketnoi, $sql_sp);
-        
-            while ($row_sp = mysqli_fetch_array($dulieu1)) 
-            {
-            ;?>
+                                <div class="container">
+                                <hr class="mt-3 mb-6">
+                            </div><!-- End .container -->
+                            <div class="container trending">
+                                <div class="heading heading-flex mb-3">
+                                    <div class="heading-left">
+                                    </div><!-- End .heading-left -->                  
+                                </div><!-- End .heading -->
+                                </div>
+                                <div id="1" class="row product__filter">
+                            <?php                                     
+                            $sql = "SELECT * FROM sanpham a join danhmuc b on a.danhmuc_id=b.danhmuc_id
+                            WHERE a.danhmuc_id = ".$id  ;
+                            $dulieu = mysqli_query($ketnoi, $sql);
+                        
+                            while ($row = mysqli_fetch_array($dulieu)) 
+                            {
+                            ;?>
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix best-sellers ">
+                        <div class="product product-2">
+                        <figure class="product-media">
+                            <a href="product.php?id=<?php echo $row["sanpham_id"];?>">
+                            <img src="assets/<?php echo $row["hinh_anh"];?>" >        
+                                </a>
+                                <div class="product-action-vertical">
+                                    <a style="font-family:roboto" href="wishlist.php" class="btn-product-icon btn-wishlist btn-expandable"><span>Thêm mục yêu thích</span></a>
+                                </div><!-- End .product-action -->
 
-         <div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix best-sellers ">
-         <div class="product product-2">
-         <figure class="product-media">
-            <a href="product.php?id=<?php echo $row_sp["sanpham_id"];?>">
-             <img src="assets/<?php echo $row_sp["hinh_anh"];?>" >        
-                </a>
-                <div class="product-action-vertical">
-                    <a style="font-family:roboto" href="wishlist.php" class="btn-product-icon btn-wishlist btn-expandable"><span>Thêm mục yêu thích</span></a>
-                </div><!-- End .product-action -->
-
-                <div class="product-action product-action-dark">
-                    <a style="font-family:roboto"  href="addtocart.php?id=<?php echo $row_sp['sanpham_id']?>" class="btn-product btn-cart" title="Add to cart"><span>Thêm vào giỏ</span></a>
-                    <a style="font-family:roboto" href="popup/quickView.php?id=<?php echo $row_sp["sanpham_id"];?> && danhmuc_id=<?php echo $row_sp["danhmuc_id"];?>" class="btn-product btn-quickview" title="Quick view"><span>Xem nhanh</span></a>
-                </div><!-- End .product-action -->
-            </figure><!-- End .product-media -->
+                                <div class="product-action product-action-dark">
+                                    <a style="font-family:roboto"  href="addtocart.php?id=<?php echo $row['sanpham_id']?>" class="btn-product btn-cart" title="Add to cart"><span>Thêm vào giỏ</span></a>
+                                    <a style="font-family:roboto" href="popup/quickView.php?id=<?php echo $row["sanpham_id"];?> && danhmuc_id=<?php echo $row["danhmuc_id"];?>" class="btn-product btn-quickview" title="Quick view"><span>Xem nhanh</span></a>
+                                </div><!-- End .product-action -->
+                            </figure><!-- End .product-media -->
             
-            <div class="product-body">
+                        <div class="product-body">
                                 <div class="product-cat" style="font-family:roboto" >
                                     <a style="font-family:roboto" href="#"><?php echo $row["tendanhmuc"];?></a>
                                 </div><!-- End .product-cat -->
-                                <h3 class="product-title"><a style="font-family:roboto"  href="product.php?id=<?php echo $row_sp["sanpham_id"];?>"><?php echo $row_sp["ten_sp"];?></a></h3><!-- End .product-title -->
+                                <h3 class="product-title"><a style="font-family:roboto"  href="product.php?id=<?php echo $row["sanpham_id"];?>"><?php echo $row["ten_sp"];?></a></h3><!-- End .product-title -->
                                 <br>
                                 <div style="font-family:roboto" class="product-price">
-                                <?php echo number_format($row_sp["giaban"]);?><sup>đ</sup>
+                                <?php echo number_format($row["giaban"]);?><sup>đ</sup>
                                 </div><!-- End .product-price -->
                                 <div class="ratings-container">
                                     <div class="ratings">
-                                        <div class="ratings-val" style="width:<?php echo $row_sp["rate"];?> ;"></div><!-- End .ratings-val -->
+                                        <div class="ratings-val" style="width:<?php echo $row["rate"];?> ;"></div><!-- End .ratings-val -->
                                     </div><!-- End .ratings -->
                                     
                                 </div><!-- End .rating-container -->
                             </div><!-- End .product-body -->
-            </div>
-            </div>
-            <?php 
-        }; ?>
-        </div>
+                            </div>
+                            </div>
+                            <?php 
+                        }; ?>
+                        </div>
 
                     </div><!-- End .col-xl-4-5col -->
                 </div><!-- End .row -->
             </div><!-- End .container -->
-                                    
+
+                           <!--Phân luồng các trang-->         
                 			<nav aria-label="Page navigation">
 							    <ul class="pagination justify-content-center">
 							        <li class="page-item disabled">
-							            <a class="page-link page-link-prev" href="#" aria-label="Previous" tabindex="-1" aria-disabled="true">
+                                    <a class="page-link page-link-prev" href="#" aria-label="Previous" tabindex="-1" aria-disabled="true">
 							                <span aria-hidden="true"><i class="icon-long-arrow-left"></i></span>Prev
 							            </a>
 							        </li>
