@@ -4,7 +4,6 @@
 require("header.php");
 ?>
 
-<!-- molla/checkout.html  22 Nov 2019 09:55:06 GMT -->
 
 <body>
     <div class="page-wrapper">
@@ -23,7 +22,6 @@ require("header.php");
                     </ol>
                 </div><!-- End .container -->
             </nav><!-- End .breadcrumb-nav -->
-
             <div class="page-content">
             	<div class="checkout">
 	                <div class="container">
@@ -31,75 +29,99 @@ require("header.php");
 		                	<div class="row">
 		                		<div class="col-lg-9">
 		                			<h2 class="checkout-title" style=" font-family: roboto">Chi tiết hóa đơn</h2><!-- End .checkout-title -->
-		                				<div class="row">
-		                					<div class="col-sm-6">
-		                						<label style=" font-family: roboto">Họ *</label>
-		                						<input type="text" class="form-control" required>
-		                					</div><!-- End .col-sm-6 -->
+									<label style=" font-family: roboto">Họ tên *</label>
+	            						<input style=" font-family: roboto" type="text" class="form-control" required>
 
-		                					<div class="col-sm-6">
-		                						<label style=" font-family: roboto">Tên *</label>
-		                						<input type="text" class="form-control" required>
-		                					</div><!-- End .col-sm-6 -->
-		                				</div><!-- End .row -->
+										<label style=" font-family: roboto">Email *</label>
+	        							<input type="email" class="form-control" required>
+
 
 	            						<label style=" font-family: roboto">Địa chỉ *</label>
 	            						<input style=" font-family: roboto" type="text" class="form-control" placeholder="Số nhà, xóm, phường.... " required>
 
-	            						<div class="row">
-		                					<div class="col-sm-6">
-		                						<label style=" font-family: roboto">Thành phố *</label>
-		                						<input type="text" class="form-control" required>
-		                					</div><!-- End .col-sm-6 -->
-
-		                					<div class="col-sm-6">
-		                						<label style=" font-family: roboto">Số điện thoại *</label>
-		                						<input type="number" class="form-control" required>
-		                					</div><!-- End .col-sm-6 -->
-		                				</div><!-- End .row -->
-
-
-	                					<label style=" font-family: roboto">Email *</label>
-	        							<input type="email" class="form-control" required>
-
+	                					<label style=" font-family: roboto">Số điện thoại *</label>
+	        							<input type="number" class="form-control" required>
 
 	                					<label style=" font-family: roboto">Ghi chú: </label>
 	        							<textarea style=" font-family: roboto" class="form-control" cols="30" rows="4" placeholder="Ghi chú về đơn đặt hàng của bạn, ví dụ: vấn đề giao hàng...."></textarea>
+										<div class="cart-bottom">
+											<div class="cart-discount">
+												<form action="#" method="post">
+													<div class="input-group">
+														<input type="text" class="form-control" name ="giamgia" required placeholder="mã giảm giá">
+														<div class="input-group-append">
+															<button class="btn btn-outline-primary-2" type="submit"><i class="icon-long-arrow-right"></i></button>
+														</div><!-- .End .input-group-append -->
+													</div><!-- End .input-group -->
+												</form>
+											</div><!-- End .cart-discount -->
+											
+                                </div><!-- End .cart-bottom -->
+
 		                		</div><!-- End .col-lg-9 -->
 		                		<aside class="col-lg-3">
 		                			<div class="summary">
-		                				<h3 class="summary-title">Your Order</h3><!-- End .summary-title -->
+		                				<h3 class="summary-title" style=" font-family: roboto">Đơn hàng của bạn</h3><!-- End .summary-title -->
 
 		                				<table class="table table-summary">
 		                					<thead>
 		                						<tr>
-		                							<th>Product</th>
-		                							<th>Total</th>
+		                							<th style=" font-family: roboto">Sản phẩm</th>
+		                							<th style=" font-family: roboto">Tổng</th>
 		                						</tr>
 		                					</thead>
 
 		                					<tbody>
-		                						<tr>
-		                							<td><a href="#">Beige knitted elastic runner shoes</a></td>
-		                							<td>$84.00</td>
-		                						</tr>
+											<?php foreach ($cart as $key => $value) :?>
 
 		                						<tr>
-		                							<td><a href="#">Blue utility pinafore denimdress</a></td>
-		                							<td>$76,00</td>
+		                							<td><a href="#"><?php echo $value["name"];?></a></td>
+		                							<td><?php echo number_format($value["gia"])?><sup>đ</sup></td>
 		                						</tr>
-		                						<tr class="summary-subtotal">
-		                							<td>Subtotal:</td>
-		                							<td>$160.00</td>
-		                						</tr><!-- End .summary-subtotal -->
-		                						<tr>
-		                							<td>Shipping:</td>
-		                							<td>Free shipping</td>
+											<?php endforeach ?>
 		                						</tr>
-		                						<tr class="summary-total">
-		                							<td>Total:</td>
-		                							<td>$160.00</td>
-		                						</tr><!-- End .summary-total -->
+												<tr class="summary-shipping-row" style=" font-family: roboto">
+												<tr class="summary-total" style=" font-family: roboto">
+												<?php
+												if(isset($GET["giamgia"]))
+												{
+												if($_GET["giamgia"]=="LIXI2023sun")
+												{
+													?>
+													<td>
+															<input type="radio" id="ma" name="ma" class="custom-control-input">
+															<label class="custom-control-label" for="ma">Mã giảm giá:</label>
+													</td>
+													<td>500,000</td>
+	
+												</tr>
+												<tr class="summary-total" style=" font-family: roboto">
+													<td>Tổng:</td>
+													<td><?php echo number_format($thanhtoan=$_SESSION['tongtien'] +20000-500000) ?></td>
+												</tr><!-- End .summary-total -->
+												<?php $_SESSION['thanhtoan']=$thanhtoan;?>
+	
+												<?php
+												}
+												else{
+													?>
+													<td>
+															<input type="radio" id="ma" name="ma" class="custom-control-input">
+															<label class="custom-control-label" for="ma">Mã giảm giá:</label>
+													</td>
+													<td>0</td>
+	
+												</tr>
+												<tr class="summary-total" style=" font-family: roboto">
+													<td>Tổng:</td>
+													<td><?php echo number_format($thanhtoan=$_SESSION['tongtien'] +20000) ?></td>
+												</tr><!-- End .summary-total --> 
+												<?php $_SESSION['thanhtoan']=$thanhtoan;?>
+												<?php
+												}
+											}
+												?>
+	
 		                					</tbody>
 		                				</table><!-- End .table table-summary -->
 
@@ -107,29 +129,14 @@ require("header.php");
 										    <div class="card">
 										        <div class="card-header" id="heading-1">
 										            <h2 class="card-title">
-										                <a role="button" data-toggle="collapse" href="#collapse-1" aria-expanded="true" aria-controls="collapse-1">
-										                    Direct bank transfer
+										                <a role="button" data-toggle="collapse" href="#collapse-1" aria-expanded="true" aria-controls="collapse-1" style=" font-family: roboto">
+										                    Thanh toán chuyển khoản
 										                </a>
 										            </h2>
 										        </div><!-- End .card-header -->
-										        <div id="collapse-1" class="collapse show" aria-labelledby="heading-1" data-parent="#accordion-payment">
+										        <div id="collapse-1" class="collapse show" aria-labelledby="heading-1" data-parent="#accordion-payment" >
 										            <div class="card-body">
-										                Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.
-										            </div><!-- End .card-body -->
-										        </div><!-- End .collapse -->
-										    </div><!-- End .card -->
-
-										    <div class="card">
-										        <div class="card-header" id="heading-2">
-										            <h2 class="card-title">
-										                <a class="collapsed" role="button" data-toggle="collapse" href="#collapse-2" aria-expanded="false" aria-controls="collapse-2">
-										                    Check payments
-										                </a>
-										            </h2>
-										        </div><!-- End .card-header -->
-										        <div id="collapse-2" class="collapse" aria-labelledby="heading-2" data-parent="#accordion-payment">
-										            <div class="card-body">
-										                Ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. 
+													Thực hiện thanh toán của bạn trực tiếp vào tài khoản ngân hàng của chúng tôi. Vui lòng sử dụng ID đơn đặt hàng của bạn làm tham chiếu thanh toán. Đơn hàng của bạn sẽ không được giao cho đến khi chúng tôi nhận được tiền. Số tài khoản sẽ được gửi vào mail khi bạn click thanh toán.
 										            </div><!-- End .card-body -->
 										        </div><!-- End .collapse -->
 										    </div><!-- End .card -->
@@ -137,51 +144,22 @@ require("header.php");
 										    <div class="card">
 										        <div class="card-header" id="heading-3">
 										            <h2 class="card-title">
-										                <a class="collapsed" role="button" data-toggle="collapse" href="#collapse-3" aria-expanded="false" aria-controls="collapse-3">
-										                    Cash on delivery
+										                <a class="collapsed" role="button" data-toggle="collapse" href="#collapse-3" aria-expanded="false" aria-controls="collapse-3" style=" font-family: roboto">
+										                    Thanh toán khi nhận được hàng
 										                </a>
 										            </h2>
 										        </div><!-- End .card-header -->
 										        <div id="collapse-3" class="collapse" aria-labelledby="heading-3" data-parent="#accordion-payment">
-										            <div class="card-body">Quisque volutpat mattis eros. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. 
+										            <div class="card-body">Vui lòng thanh toán cho shipper sau khi bạn nhận và kiểm tra hàng. 
 										            </div><!-- End .card-body -->
 										        </div><!-- End .collapse -->
 										    </div><!-- End .card -->
 
-										    <div class="card">
-										        <div class="card-header" id="heading-4">
-										            <h2 class="card-title">
-										                <a class="collapsed" role="button" data-toggle="collapse" href="#collapse-4" aria-expanded="false" aria-controls="collapse-4">
-										                    PayPal <small class="float-right paypal-link">What is PayPal?</small>
-										                </a>
-										            </h2>
-										        </div><!-- End .card-header -->
-										        <div id="collapse-4" class="collapse" aria-labelledby="heading-4" data-parent="#accordion-payment">
-										            <div class="card-body">
-										                Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum.
-										            </div><!-- End .card-body -->
-										        </div><!-- End .collapse -->
-										    </div><!-- End .card -->
-
-										    <div class="card">
-										        <div class="card-header" id="heading-5">
-										            <h2 class="card-title">
-										                <a class="collapsed" role="button" data-toggle="collapse" href="#collapse-5" aria-expanded="false" aria-controls="collapse-5">
-										                    Credit Card (Stripe)
-										                    <img src="assets/images/payments-summary.png" alt="payments cards">
-										                </a>
-										            </h2>
-										        </div><!-- End .card-header -->
-										        <div id="collapse-5" class="collapse" aria-labelledby="heading-5" data-parent="#accordion-payment">
-										            <div class="card-body"> Donec nec justo eget felis facilisis fermentum.Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Lorem ipsum dolor sit ame.
-										            </div><!-- End .card-body -->
-										        </div><!-- End .collapse -->
-										    </div><!-- End .card -->
 										</div><!-- End .accordion -->
 
 		                				<button type="submit" class="btn btn-outline-primary-2 btn-order btn-block">
-		                					<span class="btn-text">Place Order</span>
-		                					<span class="btn-hover-text">Proceed to Checkout</span>
+		                					<span class="btn-text" style=" font-family: roboto">Đặt hàng</span>
+		                					<span class="btn-hover-text" style=" font-family: roboto">Tiến hành thanh toán</span>
 		                				</button>
 		                			</div><!-- End .summary -->
 		                		</aside><!-- End .col-lg-3 -->
@@ -190,6 +168,7 @@ require("header.php");
 	                </div><!-- End .container -->
                 </div><!-- End .checkout -->
             </div><!-- End .page-content -->
+
         </main><!-- End .main -->
 
 <?php
