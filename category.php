@@ -150,7 +150,7 @@ $row = mysqli_fetch_array($dulieu);
                                 <br>
                                 <div style="font-family:roboto" class="product-price">
                                 <?php if (number_format($row["khuyenmai"])>0) echo number_format($row["khuyenmai"]).'₫'; else echo number_format($row["giaban"]).'₫';?> 
-                                    <del class="mx-2 font-weight-light"> <?php if (number_format($row["khuyenmai"])>0) echo   number_format($row["giaban"]).'₫'?></del>
+                                    <del class="mx-2 font-weight-light" style="color:gray"> <?php if (number_format($row["khuyenmai"])>0) echo   number_format($row["giaban"]).'₫'?></del>
                                 </div><!-- End .product-price -->
                                 <div class="ratings-container">
                                     <div class="ratings">
