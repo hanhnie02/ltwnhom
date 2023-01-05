@@ -7,17 +7,16 @@
 require("header.php");
 ?>
         <main class="main">
-        	<div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
+        	<div class="page-header text-center" style="background-image: url('https://png.pngtree.com/background/20210709/original/pngtree-spring-festival-new-year-yellow-xiangyun-picture-image_929390.jpg')">
         		<div class="container">
-        			<h1 class="page-title">Wishlist<span>Shop</span></h1>
+        			<h1 class="page-title">Sản phẩm yêu thích</h1>
         		</div><!-- End .container -->
         	</div><!-- End .page-header -->
             <nav aria-label="breadcrumb" class="breadcrumb-nav">
                 <div class="container">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                        <li class="breadcrumb-item"><a href="#">Shop</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Wishlist</li>
+                        <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Mục yêu thích</li>
                     </ol>
                 </div><!-- End .container -->
             </nav><!-- End .breadcrumb-nav -->
@@ -27,97 +26,60 @@ require("header.php");
 					<table class="table table-wishlist table-mobile">
 						<thead>
 							<tr>
-								<th>Product</th>
-								<th>Price</th>
-								<th>Stock Status</th>
-								<th></th>
+								<th>Sản phẩm</th>
+								<th>Giá</th>
+								<th>Trạng thái</th>
 								<th></th>
 							</tr>
 						</thead>
 
 						<tbody>
+						<?php foreach ($wishlist as $key => $value) :?>
+
 							<tr>
 								<td class="product-col">
 									<div class="product">
 										<figure class="product-media">
-											<a href="#">
-												<img src="assets/images/products/table/product-1.jpg" alt="Product image">
+											<a href="product.php?id=<?php echo $value["id"];?>">
+												<img src="assets/<?php echo $value["img"];?>" alt="Product image">
 											</a>
 										</figure>
 
 										<h3 class="product-title">
-											<a href="#">Beige knitted elastic runner shoes</a>
+											<a href="product.php?id=<?php echo $value["id"];?>"><?php echo $value["name"];?></a>
+											<a href=""><?php echo $value["sl"];?></a>
 										</h3><!-- End .product-title -->
 									</div><!-- End .product -->
 								</td>
-								<td class="price-col">$84.00</td>
+								<td class="price-col" text-align="right" style=" font-family: roboto"><?php echo number_format($value["gia"])?><sup>đ</sup></td>
+							   <?php
+							   $sluong = $value['sl']
+							   echo 'hah';
+							   if($sluong>0)
+							   {
+								?>
 								<td class="stock-col"><span class="in-stock">In stock</span></td>
+								<?php
+							   }
+							   ?>
+
 								<td class="action-col">
                                     <div class="dropdown">
-									<button class="btn btn-block btn-outline-primary-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="icon-list-alt"></i>Select Options
-                                    </button>
-
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">First option</a>
-                                        <a class="dropdown-item" href="#">Another option</a>
-                                        <a class="dropdown-item" href="#">The best option</a>
-                                      </div>
-                                    </div>
+									<button class="btn btn-block btn-outline-primary-2"><i class="icon-cart-plus"></i>Thêm vào giỏ</button>
 								</td>
-								<td class="remove-col"><button class="btn-remove"><i class="icon-close"></i></button></td>
-							</tr>
-							<tr>
-								<td class="product-col">
-									<div class="product">
-										<figure class="product-media">
-											<a href="#">
-												<img src="assets/images/products/table/product-2.jpg" alt="Product image">
-											</a>
-										</figure>
-
-										<h3 class="product-title">
-											<a href="#">Blue utility pinafore denim dress</a>
-										</h3><!-- End .product-title -->
-									</div><!-- End .product -->
-								</td>
-								<td class="price-col">$76.00</td>
-								<td class="stock-col"><span class="in-stock">In stock</span></td>
-								<td class="action-col">
-									<button class="btn btn-block btn-outline-primary-2"><i class="icon-cart-plus"></i>Add to Cart</button>
-								</td>
-								<td class="remove-col"><button class="btn-remove"><i class="icon-close"></i></button></td>
-							</tr>
-							<tr>
-								<td class="product-col">
-									<div class="product">
-										<figure class="product-media">
-											<a href="#">
-												<img src="assets/images/products/table/product-3.jpg" alt="Product image">
-											</a>
-										</figure>
-
-										<h3 class="product-title">
-											<a href="#">Orange saddle lock front chain cross body bag</a>
-										</h3><!-- End .product-title -->
-									</div><!-- End .product -->
-								</td>
-								<td class="price-col">$52.00</td>
-								<td class="stock-col"><span class="out-of-stock">Out of stock</span></td>
-								<td class="action-col">
-									<button class="btn btn-block btn-outline-primary-2 disabled">Out of Stock</button>
-								</td>
-								<td class="remove-col"><button class="btn-remove"><i class="icon-close"></i></button></td>
+								<td class="remove-col"><button class="btn-remove" ><a href="addtowishlist.php?id=<?php echo $value['id']?>&action=delete" class="icon-close"></a></button></td>
 							</tr>
 						</tbody>
+						<?php endforeach ?>
+
 					</table><!-- End .table table-wishlist -->
 	            	<div class="wishlist-share">
 	            		<div class="social-icons social-icons-sm mb-2">
 	            			<label class="social-label">Share on:</label>
-	    					<a href="#" class="social-icon" title="Facebook" target="_blank"><i class="icon-facebook-f"></i></a>
-	    					<a href="#" class="social-icon" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>
-	    					<a href="#" class="social-icon" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
-	    					<a href="#" class="social-icon" title="Youtube" target="_blank"><i class="icon-youtube"></i></a>
+	    					<a href="https://www.facebook.com/" class="social-icon" title="Facebook" target="_blank"><i class="icon-facebook-f"></i></a>
+	    					<a href="https://twitter.com/home?lang=vi" class="social-icon" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>
+	    					<a href="https://www.instagram.com/" class="social-icon" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
+	    					<a href="https://www.youtube.com/" class="social-icon" title="Youtube" target="_blank"><i class="icon-youtube"></i></a>
 	    					<a href="#" class="social-icon" title="Pinterest" target="_blank"><i class="icon-pinterest"></i></a>
 	    				</div><!-- End .soial-icons -->
 	            	</div><!-- End .wishlist-share -->

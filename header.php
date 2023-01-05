@@ -1,5 +1,5 @@
 <?php
-// Ket noi CSDL 
+// Ket noi CSDL hihi
 $servername="localhost";
 $username="root";
 $password="";
@@ -11,6 +11,9 @@ if($conn->connect_error){
 mysqli_query($conn,'set names utf8');
 session_start();
 $cart = (isset($_SESSION['cart'])) ? $_SESSION['cart'] : [];
+$wishlist = (isset($_SESSION['wishlist'])) ? $_SESSION['wishlist'] : [];
+
+// haha
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -229,17 +232,15 @@ body {
                     </div>
 
                     <div class="header-right">
-                       
-
-                        <div class="wishlist">
-                            <a href="wishlist.php" title="Wishlist">
+                    <div class="dropdown cart-dropdown">
+                        <a href="wishlist.php" class="dropdown-toggle">
                                 <div class="icon">
                                     <i class="icon-heart-o"></i>
-                                  
+                                    <span class="cart-count"><?php echo count($wishlist)?></span>
                                 </div>
-                                <p>Yêu thích</p>
-                            </a>
-                        </div>
+                                <p style="font-family:roboto ">Yêu thích</p>
+                            </a>    
+                    </div>
                         <div class="dropdown cart-dropdown">
                         <a href="cart.php" class="dropdown-toggle">
                                 <div class="icon">
@@ -273,8 +274,7 @@ body {
                                             while($row_danhmuc=$result->fetch_assoc())
                                             {
                                                 ?>
-                                                <li class="item-lead"><a style="font-family:roboto" href="#"><?php echo $row_danhmuc['tendanhmuc'];?></a></li>
-                                           
+                                                <li class="item-lead"><a style="font-family:roboto" href="category.php?id=<?php echo $row_danhmuc['danhmuc_id'];?>"><?php echo $row_danhmuc['tendanhmuc']?></a></li>
                                                 <?php
                                             $i++;
                                             }
@@ -336,11 +336,11 @@ body {
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="baohanh.php" style="font-family:roboto">Bảo hành</a>
+                                <a href="baohanh.php" style="font-family:roboto">Bảo hành</a>
 
                                 </li>
                                 <li>
-                                    <a href="contact.php" style="font-family:roboto">Liên hệ</a>
+                                <a href="contact.php" style="font-family:roboto">Liên hệ</a>
 
                                 </li>
                             </ul><!-- End .menu -->
@@ -353,17 +353,3 @@ body {
                 </div><!-- End .container -->
             </div><!-- End .header-bottom -->
         </header><!-- End .header -->
-            <!-- Plugins JS File -->
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/jquery.hoverIntent.min.js"></script>
-    <script src="assets/js/jquery.waypoints.min.js"></script>
-    <script src="assets/js/superfish.min.js"></script>
-    <script src="assets/js/owl.carousel.min.js"></script>
-    <script src="assets/js/bootstrap-input-spinner.js"></script>
-    <script src="assets/js/jquery.plugin.min.js"></script>
-    <script src="assets/js/jquery.magnific-popup.min.js"></script>
-    <script src="assets/js/jquery.countdown.min.js"></script>
-    <!-- Main JS File -->
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/demos/demo-3.js"></script>

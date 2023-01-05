@@ -330,7 +330,7 @@ body {
                     </a>
 
                     <div class="product-action-vertical">
-                        <a style="font-family:roboto" href="wishlist.php" class="btn-product-icon btn-wishlist btn-expandable"><span>Thêm mục yêu thích</span></a>
+                        <a style="font-family:roboto" href="addtowishlist.php?id=<?php echo $row['sanpham_id']?>" class="btn-product-icon btn-wishlist btn-expandable"><span>Thêm mục yêu thích</span></a>
                     </div><!-- End .product-action -->
 
                     <div class="product-action product-action-dark">
@@ -389,11 +389,11 @@ body {
              <div class="product product-2">
              <figure class="product-media">
                 <a href="product.php?id=<?php echo $row["sanpham_id"];?>">
-                 <img src="assets/<?php echo $row["hinh_anh"];?>" >                                            </picture>
+                 <img src="assets/<?php echo $row["hinh_anh"];?>" >                                           
                     </a>
 
                     <div class="product-action-vertical">
-                        <a style="font-family:roboto"  href="wishlist.php" class="btn-product-icon btn-wishlist btn-expandable"><span>Thêm mục yêu thích</span></a>
+                    <a style="font-family:roboto" href="addtowishlist.php?id=<?php echo $row['sanpham_id']?>" class="btn-product-icon btn-wishlist btn-expandable"><span>Thêm mục yêu thích</span></a>
                     </div><!-- End .product-action -->
 
                     <div class="product-action product-action-dark">
@@ -456,7 +456,7 @@ body {
                     </a>
 
                     <div class="product-action-vertical">
-                        <a style="font-family:roboto" href="wishlist.php" class="btn-product-icon btn-wishlist btn-expandable"><span>Thêm mục yêu thích</span></a>
+                    <a style="font-family:roboto" href="addtowishlist.php?id=<?php echo $row['sanpham_id']?>" class="btn-product-icon btn-wishlist btn-expandable"><span>Thêm mục yêu thích</span></a>
                     </div><!-- End .product-action -->
 
                     <div class="product-action product-action-dark">
@@ -550,7 +550,7 @@ body {
                                                 </a>
 
                                                 <div class="product-action-vertical">
-                                                    <a style="font-family:roboto" href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>Thêm mục yêu thích</span></a>
+                                                <a style="font-family:roboto" href="addtowishlist.php?id=<?php echo $row['sanpham_id']?>" class="btn-product-icon btn-wishlist btn-expandable"><span>Thêm mục yêu thích</span></a>
                                                 </div><!-- End .product-action -->
 
                                                 <div class="product-action product-action-dark">
@@ -596,7 +596,7 @@ body {
                                                  <img src="assets/<?php echo $row["hinh_anh"];?>" >  
                                                 </a>                                   
                                                 <div class="product-action-vertical">
-                                                    <a style="font-family:roboto" href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>Thêm mục yêu thích</span></a>
+                                                <a style="font-family:roboto" href="addtowishlist.php?id=<?php echo $row['sanpham_id']?>" class="btn-product-icon btn-wishlist btn-expandable"><span>Thêm mục yêu thích</span></a>
                                                 </div><!-- End .product-action -->
 
                                                 <div class="product-action product-action-dark">
@@ -718,7 +718,7 @@ body {
              <img src="assets/<?php echo $row["hinh_anh"];?>" >        
                 </a>
                 <div class="product-action-vertical">
-                    <a style="font-family:roboto" href="wishlist.php" class="btn-product-icon btn-wishlist btn-expandable"><span>Thêm mục yêu thích</span></a>
+                <a style="font-family:roboto" href="addtowishlist.php?id=<?php echo $row['sanpham_id']?>" class="btn-product-icon btn-wishlist btn-expandable"><span>Thêm mục yêu thích</span></a>
                 </div><!-- End .product-action -->
 
                 <div class="product-action product-action-dark">
@@ -912,7 +912,20 @@ body {
         </div>
     </div>
 
-
+    <!-- Plugins JS File -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/jquery.hoverIntent.min.js"></script>
+    <script src="assets/js/jquery.waypoints.min.js"></script>
+    <script src="assets/js/superfish.min.js"></script>
+    <script src="assets/js/owl.carousel.min.js"></script>
+    <script src="assets/js/bootstrap-input-spinner.js"></script>
+    <script src="assets/js/jquery.plugin.min.js"></script>
+    <script src="assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="assets/js/jquery.countdown.min.js"></script>
+    <!-- Main JS File -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/demos/demo-3.js"></script>
 </body>
 
 

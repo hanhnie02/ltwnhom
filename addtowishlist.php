@@ -7,13 +7,9 @@ $conn=new mysqli($servername,$username,$password,$dbname);
 
 session_start();
 $action = (isset($_GET['action'])) ? $_GET['action'] : 'add'; 
-$slg = (isset($_GET['slg'])) ? $_GET['slg'] : 1;
-$_SESSION['tongtien']=$tongtien;
 
 
-if($slg <= 0){
-	$slg = 1;
-}
+
 if(isset($_GET['id'])){
 	$id = $_GET['id'];
 }
@@ -27,36 +23,36 @@ $item =[
 	'name'=>$product['ten_sp'],
 	'img'=>$product['hinh_anh'],
 	'gia'=>($product['khuyenmai'] > 0) ? $product['khuyenmai'] 	: $product['giaban'],
-	'slg'=> $product['soluong'],
+    'sl'=> $product['soluong']
+
 ];
 if($action == 'add'){
-	if(isset($_SESSION['cart'][$id])){
-		$_SESSION['cart'][$id]['slg'] += $slg;
+	if(isset($_SESSION['wishlist'][$id])){
+		$_SESSION['wishlist'][$id]['slg'] += $slg;
 	}
-	else{
-		$_SESSION['cart'][$id] = $item;
+	else{   
+		$_SESSION['wishlist'][$id] = $item;
 	
 	}
 }	
 // Tăng số lượng
-/*if(isset($_SESSION['cart'][$id])){
-	$_SESSION['cart'][$id]['slg'] +=1;
+/*if(isset($_SESSION['wishlist'][$id])){
+	$_SESSION['wishlist'][$id]['slg'] +=1;
 }
 else{
-	$_SESSION['cart'][$id] = $item;
+	$_SESSION['wishlist'][$id] = $item;
+
 }*/
 // Cập nhật giỏ hàng
-if($action == 'update'){
-	$_SESSION['cart'][$id]['slg'] = $slg;
-}
+
 
 //Xóa sản phẩm khỏi giỏ hàng
 if($action == 'delete'){
-	unset($_SESSION['cart'][$id]);
+	unset($_SESSION['wishlist'][$id]);
 }
-header('location: cart.php')
+header('location: wishlist.php')
 //echo "<pre>";
-//print_r($_SESSION['cart']);
+//print_r($_SESSION['wishlist']);
 
 // Thêm mới giỏ hàng
 

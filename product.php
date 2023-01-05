@@ -1,9 +1,29 @@
 <?php
 require("header.php");
 ?>
-<style>
-    .table{color: #666;}
+
+    
+    <style>
+    .main,a,span {
+        font-family: roboto;
+        color: black;
+    }
+    .table {
+        /* color: #666; */
+        margin: 0px;
+     
+    } 
+
+    .table td{
+        padding: 6px ;
+    }
+
+table{
+    border-collapse:collapse;
+}
 </style>
+
+
 <?php 
     $ketnoi = mysqli_connect("localhost","root","","sunphone");
     /*mysqli_set_charset($ketnoi, 'UTF8');*/
@@ -20,16 +40,18 @@ require("header.php");
     $dulieu = mysqli_query($ketnoi, $sql);
           //  $product = mysqli_fetch_assoc($dulieu);
     $row = mysqli_fetch_array($dulieu);
-;?>
 
+
+;?>
+<html>
 <body>
     <main class="main">
         <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
             <div class="container d-flex align-items-center">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.php" style="font-family:roboto">Trang chủ</a></li>
-                    <li class="breadcrumb-item" style="font-family:roboto">Chi tiết sản phẩm</li>
-                    <li class="breadcrumb-item" style="font-family:roboto"><?php echo $row["ten_sp"] ?></li>
+                    <li class="breadcrumb-item"><a href="index.php">Trang chủ</a></li>
+                    <li class="breadcrumb-item">Chi tiết sản phẩm</li>
+                    <li class="breadcrumb-item"><?php echo $row["ten_sp"] ?></li>
                 </ol>
             </div><!-- End .container -->
         </nav><!-- End .breadcrumb-nav -->
@@ -43,24 +65,24 @@ require("header.php");
                                 <div class="col-md-6">
                                     <div class="product-gallery">
                                         <figure class="product-main-image">
-                                            <img src="assets/<?php echo $row["hinh_anh"];?>" alt="product image">     
+                                            <img src="assets/<?php echo $row["hinh_anh"];?>" alt="product image" >     
                                         </figure><!-- End .product-main-image -->
                                     </div><!-- End .product-gallery -->
                                 </div><!-- End .col-md-6 -->
 
                                 <div class="col-md-6" >
-                                    <div class="product-details product-details-sidebar" style="font-family:roboto; font-size:20px">
+                                    <div class="product-details product-details-sidebar" style="font-size:20px">
                                         <h1 class="product-title"><?php echo $row["ten_sp"] ?></h1><!-- End .product-title -->
                                         <div class="ratings-container">
                                             <div class="ratings">
-                                                <div class="ratings-val" style="width: 80%;"></div><!-- End .ratings-val -->
+                                                <div class="ratings-val" style="width:<?php echo $row["rate"];?> ;"></div>
                                             </div><!-- End .ratings -->
                                         </div>
                                             <!-- End .rating-container -->
-                                        <p class="mb-3" style="font-family:roboto">
+                                        <p class="mb-3">
                                             <span class="product-price" >
                                                 <?php if (number_format($row["khuyenmai"])>0) echo number_format($row["khuyenmai"]).'₫'; else echo number_format($row["giaban"]).'₫';?> 
-                                                <del class="mx-2 font-weight-light"> <?php if (number_format($row["khuyenmai"])>0) echo   number_format($row["giaban"]).'₫'?></del>
+                                                <del class="mx-2 font-weight-light" style="color:#99a2aa; font-size:20px"> <?php if (number_format($row["khuyenmai"])>0) echo   number_format($row["giaban"]).'₫'?></del>
                                             </span>
 
                                         </p>
@@ -69,14 +91,14 @@ require("header.php");
                                         <div>
                                             <strong style="color:#d70018 ;font-size: 20px">Khuyến mãi</strong>
                                             <ul class="" style="list-style-type:disc ; color:#000">
-                                                <li><a style="font-family:roboto" >Lì xì ngay 360.000đ áp dụng đến 31/01</a></li>
-                                                <li><a style="font-family:roboto" >Giảm thêm tới 300.000đ khi thanh toán qua VNPAY</a></li>
-                                                <li><a style="font-family:roboto">Tặng hộp may mắn - số lượng có hạn</a></li>
+                                                <li><a>Lì xì ngay 360.000đ áp dụng đến 31/01</a></li>
+                                                <li><a>Giảm thêm tới 300.000đ khi thanh toán qua VNPAY</a></li>
+                                                <li><a>Tặng hộp may mắn - số lượng có hạn</a></li>
                                             </ul>
                                         </div><!-- End .product-content -->                                   
-                                        <p style="color:#000;font-size: 20px;font-family:roboto" for="color" style="font-family:roboto">Màu sắc: <?php echo $row["color"];?></p>
+                                        <p style="color:#000;font-size: 20px;font-family:roboto" for="color">Màu sắc: <?php echo $row["color"];?></p>
                                             <div class="details-filter-row details-row-size">
-                                                <p style="color:#000;font-size: 20px;font-family:roboto" for="ram" style="font-family:roboto">RAM: <?php echo $row["ram"];?></p>
+                                                <p style="color:#000;font-size: 20px;font-family:roboto" for="ram">RAM: <?php echo $row["ram"];?></p>
                                             </div><!-- End .details-filter-row -->
 
                                             <div class="product-details-action">
@@ -118,48 +140,48 @@ require("header.php");
                                     </li>
                                 </ul>
                                 <div class="tab-content">
-                                    <div class="tab-pane fade show active" id="product-desc-tab" role="tabpanel" aria-labelledby="product-desc-link" style="text-align: left; font-family:roboto; font-size: 16px">
+                                    <div class="tab-pane fade show active" id="product-desc-tab" role="tabpanel" aria-labelledby="product-desc-link" style="text-align: left; font-size: 16px">
                                         <div class="product-desc-content" >
                                         <?php echo $row["chitiet"];?>
                                         </div><!-- End .product-desc-content -->
                                     </div><!-- .End .tab-pane -->
-                                    <div style="text-align: left; font-family:roboto; font-size: 16px; font-color:#666" class="tab-pane fade table" id="product-info-tab" role="tabpanel" aria-labelledby="product-info-link" >
-                                        <table class="table table-striped table-bordered" >
+                                    <div style="text-align: left; font-size: 16px; font-color:#666" class="tab-pane fade table" id="product-info-tab" role="tabpanel" aria-labelledby="product-info-link" >
+                                        <table class="table table-striped table-bordered"  >
                                             <tr>
-                                                <td>&ensp; Kích thước màn hình</td>
-                                                <td>&ensp; <?php echo $row['kichthuocman']; ?></td>
+                                                <td>Kích thước màn hình</td>
+                                                <td><?php echo $row['kichthuocman']; ?></td>
                                             </tr>
                                             <tr>
-                                                <td>&ensp; Công nghệ màn hình</td>
-                                                <td>&ensp; <?php echo $row['congngheman']; ?></td>
+                                                <td>Công nghệ màn hình</td>
+                                                <td><?php echo $row['congngheman']; ?></td>
                                             </tr>
                                             <tr>
-                                                <td>&ensp; Camera sau</td>
-                                                <td>&ensp; <?php echo $row['cam_sau']; ?></td>
+                                                <td>Camera sau</td>
+                                                <td><?php echo $row['cam_sau']; ?></td>
                                             </tr>
                                             <tr>
-                                                <td>&ensp; Cam trước</td>
-                                                <td>&ensp; <?php echo $row['cam_truoc']; ?></td>
+                                                <td>Cam trước</td>
+                                                <td><?php echo $row['cam_truoc']; ?></td>
                                             </tr>
                                             <tr>
-                                                <td> &ensp; Chipset</td>
-                                                <td>&ensp; <?php echo $row['chipset']; ?></td>
+                                                <td> Chipset</td>
+                                                <td><?php echo $row['chipset']; ?></td>
                                             </tr>
                                             <tr>
-                                                <td>&ensp; Pin</td>
-                                                <td>&ensp; <?php echo $row['pin']; ?></td>
+                                                <td>Pin</td>
+                                                <td><?php echo $row['pin']; ?></td>
                                             </tr>
                                             <tr>
-                                                <td>&ensp; Hệ điều hành</td>
-                                                <td>&ensp; <?php echo $row['hedieuhanh']; ?></td>
+                                                <td>Hệ điều hành</td>
+                                                <td><?php echo $row['hedieuhanh']; ?></td>
                                             </tr>
                                             <tr>
-                                                <td>&ensp; RAM</td>
-                                                <td>&ensp; <?php echo $row['ram']; ?></td>
+                                                <td>RAM</td>
+                                                <td><?php echo $row['ram']; ?></td>
                                             </tr>
                                             <tr>
-                                                <td>&ensp; Bộ nhớ trong</td>
-                                                <td>&ensp; <?php echo $row['bonhotrong']; ?></td>
+                                                <td>Bộ nhớ trong</td>
+                                                <td><?php echo $row['bonhotrong']; ?></td>
                                             </tr>
                                         </table>
 
@@ -292,15 +314,15 @@ require("header.php");
                                         <div class="product-cat">
                                             <a href="#">Shoes</a>
                                         </div><!-- End .product-cat -->
-                                        <h3 class="product-title"><a href="product.html">Light brown studded Wide fit wedges</a></h3><!-- End .product-title -->
+                                        <h3 class="product-title"><a href="product.html"></a></h3><!-- End .product-title -->
                                         <div class="product-price">
                                             $110.00
                                         </div><!-- End .product-price -->
                                         <div class="ratings-container">
                                             <div class="ratings">
-                                                <div class="ratings-val" style="width: 80%;"></div><!-- End .ratings-val -->
+                                            <div class="ratings-val" style="width:<?php echo $rowlq["rate"];?> ;">
                                             </div><!-- End .ratings -->
-                                            <span class="ratings-text">( 1 Reviews )</span>
+                        
                                         </div><!-- End .rating-container -->
 
                                         <div class="product-nav product-nav-dots">
@@ -346,94 +368,62 @@ require("header.php");
                                 </div><!-- End .product -->
                             </div><!-- End .owl-carousel -->
                         </div><!-- End .col-lg-9 -->
+                    </div>
 
                         <aside class="col-lg-3">
                             <div class="sidebar sidebar-product">
                                 <div class="widget widget-products">
-                                    <h4 class="widget-title">Related Product</h4><!-- End .widget-title -->
+                                    <h4 class="widget-title" style="color: #fcb941; font-weight: bold">Sản phẩm liên quan</h4><!-- End .widget-title -->
+                                    <?php
+                                    $dm= $row["danhmuc_id"];
+                                            $sql = "SELECT DISTINCT * FROM sanpham a join danhmuc b on a.danhmuc_id=b.danhmuc_id where a.danhmuc_id='$dm'
+                                             order by  a.rate desc limit 4";
+                                            $dulieu = mysqli_query($ketnoi, $sql);
+                                            while ($rowlq = mysqli_fetch_array($dulieu)) 
+                                            {
+                                            ;?>
+                                    <div  class="products" style="margin: 0px; background-color:#f3f3f3; padding: 6px">
 
-                                    <div class="products">
                                         <div class="product product-sm">
                                             <figure class="product-media">
-                                                <a href="product.html">
-                                                    <img src="assets/images/products/single/sidebar/1.jpg" alt="Product image" class="product-image">
+                                                <a href="product.php?id=<?php echo $rowlq["sanpham_id"];?>">
+                                                <img src="assets/<?php echo $rowlq["hinh_anh"];?>" alt="product image" >
                                                 </a>
                                             </figure>
 
                                             <div class="product-body">
-                                                <h5 class="product-title"><a href="product.html">Light brown studded Wide fit wedges</a></h5><!-- End .product-title -->
+                                                <h5 class="product-title"><a href="product.php?id=<?php echo $rowlq["sanpham_id"];?>"><?php echo $rowlq["ten_sp"]?></a></h5><!-- End .product-title -->
                                                 <div class="product-price">
-                                                    <span class="new-price">$50.00</span>
-                                                    <span class="old-price">$110.00</span>
+                                                    <?php if (number_format($rowlq["khuyenmai"])>0) echo number_format($rowlq["khuyenmai"]).'₫'; else echo number_format($rowlq["giaban"]).'₫';?> 
+                                                    <del class="mx-2 font-weight-light" style="color:#99a2aa; font-size:small"> <?php if (number_format($rowlq["khuyenmai"])>0) echo   number_format($rowlq["giaban"]).'₫'?></del>
                                                 </div><!-- End .product-price -->
                                             </div><!-- End .product-body -->
                                         </div><!-- End .product product-sm -->
-
-                                        <div class="product product-sm">
-                                            <figure class="product-media">
-                                                <a href="product.html">
-                                                    <img src="assets/images/products/single/sidebar/2.jpg" alt="Product image" class="product-image">
-                                                </a>
-                                            </figure>
-
-                                            <div class="product-body">
-                                                <h5 class="product-title"><a href="product.html">Yellow button front tea top</a></h5><!-- End .product-title -->
-                                                <div class="product-price">
-                                                    $56.00
-                                                </div><!-- End .product-price -->
-                                            </div><!-- End .product-body -->
-                                        </div><!-- End .product product-sm -->
-
-                                        <div class="product product-sm">
-                                            <figure class="product-media">
-                                                <a href="product.html">
-                                                    <img src="assets/images/products/single/sidebar/3.jpg" alt="Product image" class="product-image">
-                                                </a>
-                                            </figure>
-
-                                            <div class="product-body">
-                                                <h5 class="product-title"><a href="product.html">Beige metal hoop tote bag</a></h5><!-- End .product-title -->
-                                                <div class="product-price">
-                                                    $50.00
-                                                </div><!-- End .product-price -->
-                                            </div><!-- End .product-body -->
-                                        </div><!-- End .product product-sm -->
-
-                                        <div class="product product-sm">
-                                            <figure class="product-media">
-                                                <a href="product.html">
-                                                    <img src="assets/images/products/single/sidebar/4.jpg" alt="Product image" class="product-image">
-                                                </a>
-                                            </figure>
-
-                                            <div class="product-body">
-                                                <h5 class="product-title"><a href="product.html">Black soft RI weekend travel bag</a></h5><!-- End .product-title -->
-                                                <div class="product-price">
-                                                    $75.00
-                                                </div><!-- End .product-price -->
-                                            </div><!-- End .product-body -->
-                                        </div><!-- End .product product-sm -->
+                                      
                                     </div><!-- End .products -->
-
-                                    <a href="category.html" class="btn btn-outline-dark-3"><span>View More Products</span><i class="icon-long-arrow-right"></i></a>
+                                    <?php };
+                                           ?>
+                                    <a href="category.php?id=<?php echo $row["danhmuc_id"];?>" class="btn btn-outline-dark-3"><span>View More Products</span><i class="icon-long-arrow-right"></i></a>
                                 </div><!-- End .widget widget-products -->
-
-                                <div class="widget widget-banner-sidebar">
-                                    <div class="banner-sidebar-title">ad box 280 x 280</div><!-- End .ad-title -->
+                                     <div class="widget widget-banner-sidebar">
+                                    <div class="banner-sidebar-title">SunPhone</div>
                                     
                                     <div class="banner-sidebar banner-overlay">
                                         <a href="#">
-                                            <img src="assets/images/blog/sidebar/banner.jpg" alt="banner">
+                                            <img src="https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/142048/Originals/%E1%BA%A3nh_Viber_2021-12-31_18-53-01-599.jpg" alt="banner">
                                         </a>
-                                    </div><!-- End .banner-ad -->
-                                </div><!-- End .widget -->
+                                    </div>  
+                                </div> 
+
                             </div><!-- End .sidebar sidebar-product -->
                         </aside><!-- End .col-lg-3 -->
                     </div><!-- End .row -->
 
                 </div><!-- End .container -->
-            </div><!-- End .page-content -->
-        </main><!-- End .main -->
+            </div>
+        </div><!-- End .page-content -->
+        
+    </main><!-- End .main -->
         <?php 
         require("footer.php");
         ?>
