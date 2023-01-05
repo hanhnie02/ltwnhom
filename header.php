@@ -1,5 +1,5 @@
 <?php
-// Ket noi CSDL hihi
+// Ket noi CSDL 
 $servername="localhost";
 $username="root";
 $password="";
@@ -11,7 +11,6 @@ if($conn->connect_error){
 mysqli_query($conn,'set names utf8');
 session_start();
 $cart = (isset($_SESSION['cart'])) ? $_SESSION['cart'] : [];
-// haha
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -332,11 +331,11 @@ body {
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="elements-list.html" style="font-family:roboto">Bảo hành</a>
+                                    <a href="baohanh.php" style="font-family:roboto">Bảo hành</a>
 
                                 </li>
                                 <li>
-                                    <a href="elements-list.html" style="font-family:roboto">Liên hệ</a>
+                                    <a href="contact.php" style="font-family:roboto">Liên hệ</a>
 
                                 </li>
                             </ul><!-- End .menu -->
@@ -349,3 +348,17 @@ body {
                 </div><!-- End .container -->
             </div><!-- End .header-bottom -->
         </header><!-- End .header -->
+            <!-- Plugins JS File -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/jquery.hoverIntent.min.js"></script>
+    <script src="assets/js/jquery.waypoints.min.js"></script>
+    <script src="assets/js/superfish.min.js"></script>
+    <script src="assets/js/owl.carousel.min.js"></script>
+    <script src="assets/js/bootstrap-input-spinner.js"></script>
+    <script src="assets/js/jquery.plugin.min.js"></script>
+    <script src="assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="assets/js/jquery.countdown.min.js"></script>
+    <!-- Main JS File -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/demos/demo-3.js"></script>
