@@ -68,7 +68,6 @@ if(isset($_POST['dangky'])){
             .form input {
                 width: 100%;
                 padding: 10px 0;
-                background-color: #FFFF99; 
                 color: black;
             }       
         </style>
