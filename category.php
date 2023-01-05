@@ -6,6 +6,7 @@
 <?php require("header.php");
 $ketnoi = mysqli_connect("localhost","root","","sunphone");
 /*mysqli_set_charset($ketnoi, 'UTF8');*/
+
 // Bước 2: Lấy dữ liệu từ trên đường đẫn
 $id=$_GET["id"];
 
@@ -17,29 +18,8 @@ $sql = "SELECT * FROM sanpham a join danhmuc b on a.danhmuc_id=b.danhmuc_id
 $dulieu = mysqli_query($ketnoi, $sql);
 //  $product = mysqli_fetch_assoc($dulieu);
 $row = mysqli_fetch_array($dulieu);
-
 ?>
 <body>
-    <?php
-    $param="";
-    $orderConditon="";
-    $orderField=isset($_GET['field']) ? $_GET['field'] : "";
-    $orderSort=isset($_GET['sort']) ? $_GET['sort'] : "";
-    if(!empty($orderField)&&!empty($orderSort)) {
-            $param .= "field=".$orderField."&sort=".$orderSort."&";
-            $orderConditon = "ORDER BY ".$orderField." ".$orderSort;
-        }
-        $item_per_page = !empty($_GET['per_page'])? $_GET['per_page'] :4;
-        $current_page = !empty($_GET['page'])?$_GET['page']:1; //trang hien tai
-        $offset = ($current_page - 1) * $item_per_page;
-        $sql = "SELECT * FROM `sanpham`  ".$orderConditon."  LIMIT " . $item_per_page . " OFFSET " . $offset ;
-        $sql_total= "SELECT * FROM `sanpham` "; 
-        $totalRecords = mysqli_query($ketnoi,$sql_total );
-        $Records = mysqli_num_rows($totalRecords);
-        $totalPages = ceil($Records / $item_per_page);
-        $query=mysqli_query($ketnoi,$sql);
-        $num2 = mysqli_num_rows($query);
-    ?>
     <div class="page-wrapper">
         <main class="main">
         <div class="page-header text-center" style="background-image: url('assets//images/banners/tett.png')">
@@ -56,6 +36,9 @@ $row = mysqli_fetch_array($dulieu);
                     </ol>
                 </div><!-- End .container -->
             </nav><!-- End .breadcrumb-nav -->
+
+                <div class="page-content">
+                    <div class="container">
                 			<div class="toolbox">
                 				<div class="toolbox-left">
                 					<div class="toolbox-info">
@@ -66,13 +49,14 @@ $row = mysqli_fetch_array($dulieu);
                 				<div class="toolbox-right">
                 					<div class="toolbox-sort">
                 						<label for="sortby">Sắp xếp theo:</label>
-                                        <!--sắp xếp lọc theo -->
+                                        <!--sắp xếp lọc theo cái-->
                 						<div class="select-custom">
-											<select name="sortby" id="sortby" class="form-control" onchange="this.options[this.selectedIndex].value && (window.location=this.options[this.selectedIndex].value);">
-												<option value="" >--Lọc--</option>
-												<option value="?field=giaban&sort=asc" >Giá tăng dần</option>
-                                                <option value="?field=giaban&sort=desc" >Giá giảm dần</option>
-                                                <option value="" ></option>
+											<select name="sortby" id="sortby" class="form-control">
+												<option value="{{Request: :url()}}?sort_by=none" >--Lọc--</option>
+												<option value="{{Request: :url()}}?sort_by=tang_dan" >Giá tăng dần</option>
+                                                <option value="{{Request: :url()}}?sort_by=giam_dan" >Giá giảm dần</option>
+                                                <option value="{{Request: :url()}}?sort_by=none" >--Lọc--</option>
+
 											</select>
 										</div>
                 					</div><!-- End .toolbox-sort -->
@@ -165,7 +149,8 @@ $row = mysqli_fetch_array($dulieu);
                                 <h3 class="product-title"><a style="font-family:roboto"  href="product.php?id=<?php echo $row["sanpham_id"];?>"><?php echo $row["ten_sp"];?></a></h3><!-- End .product-title -->
                                 <br>
                                 <div style="font-family:roboto" class="product-price">
-                                <?php echo number_format($row["giaban"]);?><sup>đ</sup>
+                                <?php if (number_format($row["khuyenmai"])>0) echo number_format($row["khuyenmai"]).'₫'; else echo number_format($row["giaban"]).'₫';?> 
+                                    <del class="mx-2 font-weight-light"> <?php if (number_format($row["khuyenmai"])>0) echo   number_format($row["giaban"]).'₫'?></del>
                                 </div><!-- End .product-price -->
                                 <div class="ratings-container">
                                     <div class="ratings">
