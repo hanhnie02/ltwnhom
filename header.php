@@ -12,7 +12,7 @@ mysqli_query($conn,'set names utf8');
 session_start();
 $cart = (isset($_SESSION['cart'])) ? $_SESSION['cart'] : [];
 $wishlist = (isset($_SESSION['wishlist'])) ? $_SESSION['wishlist'] : [];
-// haha
+
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -228,11 +228,11 @@ body {
 
                     <div class="header-right">
                 
-                        <div class="dropdown cart-dropdown">
+                        <div class="dropdown wishlist-dropdown">
                         <a href="wishlist.php" class="dropdown-toggle">
                                 <div class="icon">
                                     <i class="icon-heart-o"></i>
-                                    <span class="cart-count"><?php echo count($wishlist)?></span>
+                                    <span class="wishlist-count"><?php echo count($wishlist)?></span>
                                 </div>
                                 <p style="font-family:roboto ">yêu thích</p>
                             </a>  
