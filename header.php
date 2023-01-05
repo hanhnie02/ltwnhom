@@ -11,6 +11,7 @@ if($conn->connect_error){
 mysqli_query($conn,'set names utf8');
 session_start();
 $cart = (isset($_SESSION['cart'])) ? $_SESSION['cart'] : [];
+$wishlist = (isset($_SESSION['wishlist'])) ? $_SESSION['wishlist'] : [];
 // haha
 ?>
 <!DOCTYPE html>
@@ -226,17 +227,16 @@ body {
                     </div>
 
                     <div class="header-right">
-                       
-
-                        <div class="wishlist">
-                            <a href="wishlist.php" title="Wishlist">
+                
+                        <div class="dropdown cart-dropdown">
+                        <a href="wishlist.php" class="dropdown-toggle">
                                 <div class="icon">
                                     <i class="icon-heart-o"></i>
-                                  
+                                    <span class="cart-count"><?php echo count($wishlist)?></span>
                                 </div>
-                                <p>Yêu thích</p>
-                            </a>
-                        </div>
+                                <p style="font-family:roboto ">yêu thích</p>
+                            </a>  
+                        </div> 
                         <div class="dropdown cart-dropdown">
                         <a href="cart.php" class="dropdown-toggle">
                                 <div class="icon">
@@ -244,7 +244,8 @@ body {
                                     <span class="cart-count"><?php echo count($cart)?></span>
                                 </div>
                                 <p style="font-family:roboto ">Giỏ hàng</p>
-                            </a>    
+                            </a>  
+                        </div>  
                     </div><!-- End .header-right -->
                 </div><!-- End .container --> 
             </div><!-- End .header-middle -->

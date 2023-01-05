@@ -330,7 +330,7 @@ body {
                     </a>
 
                     <div class="product-action-vertical">
-                        <a style="font-family:roboto" href="wishlist.php" class="btn-product-icon btn-wishlist btn-expandable"><span>Thêm mục yêu thích</span></a>
+                        <a style="font-family:roboto" href="addtowishlist.php?id=<?php echo $row['sanpham_id']?>" class="btn-product-icon btn-wishlist btn-expandable" title="Add to wishlist"><span>Thêm mục yêu thích</span></a>
                     </div><!-- End .product-action -->
 
                     <div class="product-action product-action-dark">

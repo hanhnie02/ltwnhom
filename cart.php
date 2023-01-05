@@ -10,7 +10,7 @@ require("header.php");
 <body>
  
         <main class="main">
-            <div class="page-header text-center" style="background-image: url('assets//images/banners/tett.png')">
+            <div class="page-header text-center" style="background-image: url('https://png.pngtree.com/background/20210709/original/pngtree-spring-festival-new-year-yellow-xiangyun-picture-image_929390.jpg')">
                 <div class="container">
                     <h1 class="page-title">Giỏ hàng</h1>
                 </div><!-- End .container -->
