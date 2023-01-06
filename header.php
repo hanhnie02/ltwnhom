@@ -13,6 +13,7 @@ session_start();
 $cart = (isset($_SESSION['cart'])) ? $_SESSION['cart'] : [];
 // haha
 ?>
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -102,15 +103,15 @@ body {
                             </ul>
                             <div class="tab-content" id="tab-content-5">
                                 <div class="tab-pane fade show active" id="signin" role="tabpanel" aria-labelledby="signin-tab">
-                                    <form action="#">
+                                    <form action="xulylogin.php" method="POST">
                                         <div class="form-group">
                                             <label for="singin-email">Username or email address *</label>
-                                            <input type="text" class="form-control" id="singin-email" name="singin-email" required>
+                                            <input type="text" class="form-control"  name="user" required>
                                         </div><!-- End .form-group -->
 
                                         <div class="form-group">
                                             <label for="singin-password">Password *</label>
-                                            <input type="password" class="form-control" id="singin-password" name="singin-password" required>
+                                            <input type="password" class="form-control"  name="password" required>
                                         </div><!-- End .form-group -->
 
                                         <div class="form-footer">
@@ -146,15 +147,20 @@ body {
                                     </div><!-- End .form-choice -->
                                 </div><!-- .End .tab-pane -->
                                 <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
-                                    <form action="#">
+                                    <form action="xulydangki.php" method="POST">
                                         <div class="form-group">
                                             <label for="register-email">Your email address *</label>
-                                            <input type="email" class="form-control" id="register-email" name="register-email" required>
+                                            <input type="email" class="form-control"  name="user" required>
                                         </div><!-- End .form-group -->
 
                                         <div class="form-group">
                                             <label for="register-password">Password *</label>
-                                            <input type="password" class="form-control" id="register-password" name="register-password" required>
+                                            <input type="password" class="form-control"  name="password" required>
+                                        </div><!-- End .form-group -->
+
+                                        <div class="form-group">
+                                            <label for="register-password">Name *</label>
+                                            <input type="text" class="form-control"  name="name" required>
                                         </div><!-- End .form-group -->
 
                                         <div class="form-footer">
@@ -264,7 +270,6 @@ body {
                             <div class="dropdown-menu">
                                 <nav class="side-nav">
                                     <ul class="menu-vertical sf-arrows">
-
                                         <?php
                                         $sql_category="SELECT * FROM danhmuc order by danhmuc_id asc";
                                         $result=$conn->query($sql_category);
@@ -275,7 +280,6 @@ body {
                                             {
                                                 ?>
                                                 <li class="item-lead"><a style="font-family:roboto" href="#"><?php echo $row_danhmuc['tendanhmuc'];?></a></li>
-                                           
                                                 <?php
                                             $i++;
                                             }
