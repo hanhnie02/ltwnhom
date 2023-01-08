@@ -2,10 +2,38 @@
 <html lang="en">
 <?php
 require("header.php");
+if(isset($_POST['mua'])){
+	$khachhang_id = $_SESSION['khach_id'];
+	$note=$_POST['note'];
+	//$tien = $_SESSION['thanhtoan'];
+	foreach ($cart  as $value){
+	$query = mysqli_query($conn,"INSERT INTO donhang(sanpham_id,khach_id,soluong, ghichu, gia) values ('$value[id]','$khachhang_id','$value[slg]', '$note', '$value[gia]')"); //lần lượt insert vào bảng đơn hàng
+	if($query){
+		$magd = mysqli_insert_id($conn); // mã giao dịch là mã đơn hàng
+		mysqli_query($conn, "INSERT INTO giaodich(sanpham_id,soluong,donhang_id,khach_id) values ('$value[id]','$value[slg]','$magd','$khachhang_id')");
+	}
+	unset($_SESSION['cart']);
+	echo "<script type='text/javascript'>  window.location='index.php'; </script>";
+	//echo "<script> alert('Đặt hàng thành công. Vui lòng kiểm tra email') </script>";
+}
+	require('./mail/sendMail.php');
+	$tieude = "Bạn đã đặt hàng thành công!!!";
+	$noidung = "<h2>Cảm ơn quý khách đã đặt hàng.</h2> <p> Quý khách chọn thanh toán bằng ATM vui lòng chuyển khoản qua số tài khoản sau: 686868686868 - MBbank - Sun Phone</p>
+	<p>Kiểm tra thông tin đơn hàng trên website Sun Phone</p>
+
+	<p>Chúc bạn một ngày vui vẻ</p>";
+
+	$maildathang=$_SESSION['email'];
+	$mail =new mailer();
+	$mail->dathangmail($tieude, $noidung, $maildathang);
+
+}
+
 ?>
 
 
 <body>
+
     <div class="page-wrapper">
 
         <main class="main">
@@ -22,42 +50,29 @@ require("header.php");
                     </ol>
                 </div><!-- End .container -->
             </nav><!-- End .breadcrumb-nav -->
+			<?php if(isset($_SESSION['dangnhap_home'])){?>
+			<form action="" method="POST">
             <div class="page-content">
             	<div class="checkout">
 	                <div class="container">
-            			<form action="#">
+            			<form action="" method ="">
 		                	<div class="row">
 		                		<div class="col-lg-9">
 		                			<h2 class="checkout-title" style=" font-family: roboto">Chi tiết hóa đơn</h2><!-- End .checkout-title -->
 									<label style=" font-family: roboto">Họ tên *</label>
-	            						<input style=" font-family: roboto" type="text" class="form-control" required>
+	            						<input style=" font-family: roboto" type="text" name="name" class="form-control"  value="<?php echo $_SESSION['dangnhap_home']?>">
 
 										<label style=" font-family: roboto">Email *</label>
-	        							<input type="email" class="form-control" required>
-
+	        							<input type="email" class="form-control" name="email" value="<?php echo $_SESSION['email']?>">
 
 	            						<label style=" font-family: roboto">Địa chỉ *</label>
-	            						<input style=" font-family: roboto" type="text" class="form-control" placeholder="Số nhà, xóm, phường.... " required>
+	            						<input style=" font-family: roboto" type="text" class="form-control" name="address" placeholder="Số nhà, xóm, phường.... " required>
 
 	                					<label style=" font-family: roboto">Số điện thoại *</label>
-	        							<input type="number" class="form-control" required>
+	        							<input type="text" name="phone" class="form-control" required>
 
 	                					<label style=" font-family: roboto">Ghi chú: </label>
-	        							<textarea style=" font-family: roboto" class="form-control" cols="30" rows="4" placeholder="Ghi chú về đơn đặt hàng của bạn, ví dụ: vấn đề giao hàng...."></textarea>
-										<div class="cart-bottom">
-											<div class="cart-discount">
-												<form action="#" method="post">
-													<div class="input-group">
-														<input type="text" class="form-control" name ="giamgia" required placeholder="mã giảm giá">
-														<div class="input-group-append">
-															<button class="btn btn-outline-primary-2" type="submit"><i class="icon-long-arrow-right"></i></button>
-														</div><!-- .End .input-group-append -->
-													</div><!-- End .input-group -->
-												</form>
-											</div><!-- End .cart-discount -->
-											
-                                </div><!-- End .cart-bottom -->
-
+	        							<textarea style=" font-family: roboto" class="form-control" cols="30" rows="4" name = "note" placeholder="Ghi chú về đơn đặt hàng của bạn, ví dụ: vấn đề giao hàng...."></textarea>
 		                		</div><!-- End .col-lg-9 -->
 		                		<aside class="col-lg-3">
 		                			<div class="summary">
@@ -76,52 +91,14 @@ require("header.php");
 
 		                						<tr>
 		                							<td><a href="#"><?php echo $value["name"];?></a></td>
-		                							<td><?php echo number_format($value["gia"])?><sup>đ</sup></td>
+		                							<td><?php echo number_format($value["gia"]*$value["slg"])?><sup>đ</sup></td>
 		                						</tr>
 											<?php endforeach ?>
 		                						</tr>
 												<tr class="summary-shipping-row" style=" font-family: roboto">
 												<tr class="summary-total" style=" font-family: roboto">
-												<?php
-												if(isset($GET["giamgia"]))
-												{
-												if($_GET["giamgia"]=="LIXI2023sun")
-												{
-													?>
-													<td>
-															<input type="radio" id="ma" name="ma" class="custom-control-input">
-															<label class="custom-control-label" for="ma">Mã giảm giá:</label>
-													</td>
-													<td>500,000</td>
-	
-												</tr>
-												<tr class="summary-total" style=" font-family: roboto">
-													<td>Tổng:</td>
-													<td><?php echo number_format($thanhtoan=$_SESSION['tongtien'] +20000-500000) ?></td>
-												</tr><!-- End .summary-total -->
-												<?php $_SESSION['thanhtoan']=$thanhtoan;?>
-	
-												<?php
-												}
-												else{
-													?>
-													<td>
-															<input type="radio" id="ma" name="ma" class="custom-control-input">
-															<label class="custom-control-label" for="ma">Mã giảm giá:</label>
-													</td>
-													<td>0</td>
-	
-												</tr>
-												<tr class="summary-total" style=" font-family: roboto">
-													<td>Tổng:</td>
-													<td><?php echo number_format($thanhtoan=$_SESSION['tongtien'] +20000) ?></td>
-												</tr><!-- End .summary-total --> 
-												<?php $_SESSION['thanhtoan']=$thanhtoan;?>
-												<?php
-												}
-											}
-												?>
-	
+                                                <td>Thanh toán:</td>
+                                                <td><?php echo number_format($_SESSION['thanhtoan']) ?></td>
 		                					</tbody>
 		                				</table><!-- End .table table-summary -->
 
@@ -157,7 +134,7 @@ require("header.php");
 
 										</div><!-- End .accordion -->
 
-		                				<button type="submit" class="btn btn-outline-primary-2 btn-order btn-block">
+		                				<button type="submit" class="btn btn-outline-primary-2 btn-order btn-block" name="mua">
 		                					<span class="btn-text" style=" font-family: roboto">Đặt hàng</span>
 		                					<span class="btn-hover-text" style=" font-family: roboto">Tiến hành thanh toán</span>
 		                				</button>
@@ -168,8 +145,14 @@ require("header.php");
 	                </div><!-- End .container -->
                 </div><!-- End .checkout -->
             </div><!-- End .page-content -->
-
-        </main><!-- End .main -->
+			</form>
+			<?php }else{ ?>
+			<div class = "alert alert-danger">
+				<button type="button" class ="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				<strong>Vui lòng đăng nhập để mua hàng</strong><a href="index.php?action=checkout">  Đăng nhập</a>
+			</div>
+			<?php } ?>
+	        </main><!-- End .main -->
 
 <?php
 require("footer.php");
