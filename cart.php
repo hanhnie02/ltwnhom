@@ -29,6 +29,9 @@ require("header.php");
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-9">
+                                <?php
+                                $sql_laygiohang=mysqli_query($conn, "SELECT * FROM giohang ORDER BY giohang_id DESC");
+                                ?>
                                 <table class="table table-cart table-mobile" style=" font-family: roboto">
                                     <thead>
                                         <tr>
@@ -116,7 +119,7 @@ require("header.php");
 
                                             </tr><!-- End .summary-shipping-row -->
                                             <tr class="summary-shipping-row" style=" font-family: roboto">
-                                            <?php
+                                            <?php $thanhtoan=0;
                                             if(isset($_POST["giamgia"]))
                                             {
                                             if($_POST["giamgia"]=="LIXI2023sun")
@@ -131,11 +134,13 @@ require("header.php");
                                             </tr>
                                             <tr class="summary-total" style=" font-family: roboto">
                                                 <td>Tổng:</td>
-                                                <td><?php echo number_format($_SESSION['tongtien'] +20000-500000) ?></td>
+                                                <td><?php echo number_format($thanhtoan=$_SESSION['tongtien'] +20000-500000) ?></td>
                                             </tr><!-- End .summary-total -->
+                                            <?php $_SESSION['thanhtoan']=$thanhtoan;?>
+
                                             <?php
                                             }
-                                            else {
+                                            elseif($_POST["giamgia"]!="LIXI2023sun") {
                                                 ?>
                                                 <td>
                                                         <input type="radio" id="ma" name="ma" class="custom-control-input">
@@ -146,10 +151,21 @@ require("header.php");
                                             </tr>
                                             <tr class="summary-total" style=" font-family: roboto">
                                                 <td>Tổng:</td>
-                                                <td><?php echo number_format($_SESSION['tongtien'] +20000) ?></td>
+                                                <td><?php echo number_format($thanhtoan=$_SESSION['tongtien'] +20000) ?></td>
                                             </tr><!-- End .summary-total --> 
+                                            <?php $_SESSION['thanhtoan']=$thanhtoan;?>
                                             <?php
                                             }
+                                            
+                                        }
+                                        else{?>
+                                            <tr class="summary-total" style=" font-family: roboto">
+                                            <td>Tổng:</td>
+                                            <td><?php echo number_format($thanhtoan=$_SESSION['tongtien'] +20000) ?></td>
+                                            </tr><!-- End .summary-total --> 
+                                            <?php $_SESSION['thanhtoan']=$thanhtoan;?>
+
+                                        <?php
                                         }
                                             ?>
                                         </tbody>
